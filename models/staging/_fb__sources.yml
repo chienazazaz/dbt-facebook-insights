@@ -1,0 +1,25 @@
+version: 2
+sources:
+  - name: fb
+    schema: "{{var('source_dataset')}}"
+    description: "data pulled from 5S fashion web database"
+    tables:
+      - name: ad_accounts
+        identifier: "p_ad_accounts__*"
+      - name: pages
+        identifier: "p_pages__*"
+      - name: ad_insights
+        identifier: "p_ad_insights__*"
+      - name: region_demographic
+        identifier: "p_region_demographic__*"
+      - name: age_gender_demographic
+        identifier: "p_age_gender_demographic__*"
+      - name: account_insights
+        identifier: "p_account_insights__*"
+      - name: page_insights
+        identifier: "p_page_insights__*"
+      - name: post_insights
+        identifier: "p_post_insights__*"
+      - name: page_posts
+        identifier: "p_page_posts__*"
+      
