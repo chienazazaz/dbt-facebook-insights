@@ -33,6 +33,6 @@ from extracted_metric_value e, unnest({{var("json_transform_schema")}}.json_tran
 
 {{dbt_utils.deduplicate(
     relation = 'unnested_data',
-    partition_by = 'metric_id,metric_time,gender_group,age_group',
+    partition_by = 'metric_id,metric_time,second',
     order_by = 'metric_time desc'
 )}}
