@@ -1,11 +1,12 @@
+
 {{
     config(
     materialized = 'table',
     )
 }}
 
-{% set metrics_by_demographic_groups = [
-    "page_impressions_by_age_gender_unique", 
+{% set metrics_by_cities = [
+    "post_video_view_time_by_region_id", 
 ]%}
 
 WITH extracted_metric_value AS (
@@ -18,19 +19,18 @@ WITH extracted_metric_value AS (
         unnest(VALUES) AS metric_values
     WHERE
         metric_name IN (
-            '{{ metrics_by_demographic_groups | join("','") }}'
+            '{{ metrics_by_cities | join("','") }}'
         )
 ),
 unnested_data as (
     select e.* except(metric_value),
-case split(json_value(m,"$.key"),".")[safe_offset(0)] when "F" then "Female" when 'M' then 'Male' end as gender_group,
-split(json_value(m,"$.key"),".")[safe_offset(1)] as age_group,
+json_value(m,"$.key") as city,
 json_value(m,"$.value") as metric_value,
 from extracted_metric_value e, unnest({{var("json_transform_schema")}}.json_transform(metric_value)) as m
 )
 
 {{dbt_utils.deduplicate(
     relation = 'unnested_data',
-    partition_by = 'metric_id,metric_time,gender_group,age_group',
+    partition_by = 'metric_id,metric_time,city',
     order_by = 'metric_time desc'
 )}}
