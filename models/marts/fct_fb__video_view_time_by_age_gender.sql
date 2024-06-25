@@ -23,7 +23,11 @@ WITH extracted_metric_value AS (
 ),
 unnested_data as (
     select e.* except(metric_value),
-case split(json_value(m,"$.key"),".")[safe_offset(0)] when "F" then "Female" when 'M' then 'Male' end as gender_group,
+case split(json_value(m,"$.key"),".")[safe_offset(0)] 
+    when "F" then "Female" 
+    when 'M' then 'Male' 
+    when 'U' then 'Unknown' 
+    end as gender_group,
 split(json_value(m,"$.key"),".")[safe_offset(1)] as age_group,
 json_value(m,"$.value") as metric_value,
 from extracted_metric_value e, unnest({{var("json_transform_schema")}}.json_transform(metric_value)) as m
