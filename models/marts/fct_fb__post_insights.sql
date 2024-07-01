@@ -28,7 +28,7 @@
 WITH extracted_metric_value AS (
     SELECT
         p.* EXCEPT(VALUES,last_sync_at),
-        TIMESTAMP(json_value(metric_values, '$.end_time')) AS metric_time,
+        date_add(date(TIMESTAMP(json_value(metric_values, '$.end_time')), interval 1 day)) AS metric_time,
         safe_cast(json_value(metric_values, '$.value') AS float64) AS metric_value,
     FROM
         {{ ref('stg_fb__post_insights') }} p,

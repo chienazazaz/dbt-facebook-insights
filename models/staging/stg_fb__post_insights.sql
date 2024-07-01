@@ -8,6 +8,7 @@ with deduplicate as (
 select
     json_value(data,'$.id') as metric_id,
     split(json_value(data,'$.id'),"/")[safe_offset(0)] as post_id,
+    split(split(json_value(data,'$.id'),"/")[safe_offset(0)],"_")[safe_offset(0)] as page_id,
     json_value(data,'$.name') as metric_name,
     json_value(data,'$.period') as aggregate_period,
     json_value(data,'$.title') as metric_title,

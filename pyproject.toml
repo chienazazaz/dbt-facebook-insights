@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "dbt-facebook-insights"
+name = "dbt-fb-insights"
 version = "0.1.0"
 description = ""
 authors = ["Chien Le <lchien063@gmail.com>"]

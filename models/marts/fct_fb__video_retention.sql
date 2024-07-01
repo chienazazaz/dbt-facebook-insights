@@ -24,10 +24,11 @@ WITH extracted_metric_value AS (
         )
 ),
 unnested_data as (
-    select e.* except(metric_value),
-json_value(m,"$.key") as second,
-json_value(m,"$.value") as metric_value,
-from extracted_metric_value e, unnest({{var("json_transform_schema")}}.json_transform(metric_value)) as m
+select e.* except(metric_value),
+    safe_cast(json_value(m,"$.key") as int64) as second,
+    safe_cast(json_value(m,"$.value") as float64) as metric_value,
+from extracted_metric_value e, 
+unnest({{var("json_transform_schema")}}.json_transform(metric_value)) as m
 )
 
 {{dbt_utils.deduplicate(
