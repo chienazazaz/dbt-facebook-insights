@@ -1,0 +1,4 @@
+version: 2
+models:
+  - name: fct_fb__video_retention
+    description: Facebook video retention data from Facebook Insights API

@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: dim_fb__posts
+    description: "Facebook post dimension table, including metadata of the post"
+    columns:
+      - name: tag_line
+        description: "First line of the text content"
+      - name: main_body
+        description: "The first part of the text content before the first delimeter"
+      - name: first_footer
+        description: ""
+      - name: second_footer
+        description: ""
+      - name: content_id
+        description: ""

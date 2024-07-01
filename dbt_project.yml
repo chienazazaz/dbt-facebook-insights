@@ -22,7 +22,7 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 models:
-  dbt_fb_insights:
+  fb:
     staging:
       materialized: view
     marts:

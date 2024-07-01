@@ -1,0 +1,4 @@
+version: 2
+models:
+  - name: fct_fb__video_view_time_by_age_gender
+    description: Facebook video view time breakdown by age and gender

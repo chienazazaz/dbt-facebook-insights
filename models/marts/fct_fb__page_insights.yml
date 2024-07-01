@@ -1,0 +1,4 @@
+version: 2
+models:
+  - name: fct_fb__page_insights
+    description: Facebook page insights

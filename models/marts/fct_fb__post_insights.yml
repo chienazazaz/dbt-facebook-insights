@@ -1,0 +1,4 @@
+version: 2
+models:
+  - name: fct_fb__post_insights
+    description: Facebook post insights. Include all supported metrics for a post.
